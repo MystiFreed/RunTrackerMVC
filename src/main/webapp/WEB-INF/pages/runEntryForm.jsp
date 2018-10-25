@@ -7,23 +7,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Run Tracker</title>
+<script>
+
+function checkBlank() {
+	var rundate = document.getElementById('rundate').value;
+	if(rundate == "") {
+		alert('Please ensure that all required fields are completed before submitting.');
+		return false;
+	}
+	else {
+		return true;}
+	}
+function checkFormat() {
+	if(!/^[\d{2}-\d{2}-\d{4} ]=$/.test(rundate))
+		return false;
+	} 
+
+</script>
 </head>
 <body>
 <h2>New Run Entry Form</h2>
-<mvc:form modelAttribute="run" action="result.mvc">
+<mvc:form modelAttribute="run" action="result.mvc" method="post" onsubmit="return checkBlank();">
 	<table>
 	    <tr>
 	        <td><mvc:label path="runDate">Date of Run:</mvc:label></td>
-	        <td><mvc:input path="runDate" /></td>
+	        <td><mvc:input path="runDate" id="rundate"/></td>
+	        
 	    </tr>
 	    <tr>
 	        <td><mvc:label path="runLength">Length of Run (in minutes):</mvc:label></td>
-	        <td><mvc:input path="runLength" />       	
+	        <td><mvc:input path="runLength" id="runlength"/>       	
 	        	</td>
 	    </tr>
 	    <tr>
 	        <td><mvc:label path="timeOfDay">Time of Day:</mvc:label></td>
-	        <td><mvc:radiobuttons path="timeOfDay" /></td>
+	        <td><mvc:radiobuttons path="timeOfDay" id="timeofday"/></td>
 	    </tr>
 	    <tr>
             <td><mvc:label path="goodRun">This was a good run!</mvc:label></td>
